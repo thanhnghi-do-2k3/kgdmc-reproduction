@@ -1,4 +1,4 @@
-# Paper 2 — KGDMC reproduction code
+# KGDMC reproduction study
 
 > Staging draft: full installation, dataset/image provenance, exact cache paths, and complete GPU reruns are not yet verified. This folder is not ready to publish.
 
@@ -40,11 +40,11 @@ python -m kgdmc.cli data encode-images --dataset fb15k237 `
 
 The script `scripts/run_recovery_subset.py` passes the same corruption manifest to training and inference. The `experiments suite` implementation also passes the same manifest to training and inference for its triplet experiments. Their triplet precision/recall measures training-pair ranking, not held-out performance. Do not report those metrics as independent evaluation or paper reproduction. Historical subset runs were saved locally with W&B disabled; changing the project name does not upload or recreate them.
 
-The following is the original adapted-suite invocation for reference, not a verified clean-environment or official benchmark rerun. Replace the cache paths with actual paths and separately verify the evaluation protocol:
+The following is the original adapted-suite invocation for reference, not a verified clean-environment or official benchmark rerun. New main and ablation runs belong in the [KGDMC main W\&B project](https://forge.coreweave.com/wandb/nghidt-hcmus/multimodal-kg-error-detection). Recovered evaluation entries are separated in the [KGDMC evaluation/subset project](https://forge.coreweave.com/wandb/nghidt-hcmus/multimodal-kg-error-detection-subset); their subset provenance must be checked before interpreting them. Replace the cache paths with actual paths and separately verify the evaluation protocol:
 
 ```powershell
 $env:WANDB_MODE="online"
-$env:WANDB_PROJECT="graph-paper-2-kgdmc"
+$env:WANDB_PROJECT="multimodal-kg-error-detection"
 $env:WANDB_RUN_GROUP="paper2-full-suite-rtx5070"
 python -m kgdmc.cli experiments suite `
   --dataset fb15k237 `
