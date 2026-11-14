@@ -1,15 +1,27 @@
 # KGDMC reproduction study
 
-> Staging draft: full installation, dataset/image provenance, exact cache paths, and complete GPU reruns are not yet verified. This folder is not ready to publish.
+> Scope: this is a public code scaffold for the group's compute-adapted KGDMC implementation, not evidence of a complete paper reproduction. Dataset/image provenance, a clean installation, held-out evaluation, and full GPU reruns remain unverified.
 
 Install from the source checkout in editable mode as shown below. A regular non-editable wheel install was checked and resolves the CLI data root inside the Python environment rather than the checkout; that installation mode is not supported by this package layout.
 
 This folder contains the DMR/MTC reconstruction and scripts; datasets, image manifests, feature caches and results are not included. The available image source and corruption universe are reconstructed; outputs must be labeled `DATA_RECONSTRUCTED_COMPUTE_ADAPTED` unless the official assets are verified.
 
+## Reported hardware and environment limits
+
+The group's rental record for the KGDMC attempt lists Ubuntu 24.04, an Intel Core i5 (generation not recorded), and an NVIDIA RTX 5060 Ti. This is the reported rental configuration, not per-run telemetry. Historical Python, PyTorch, and CUDA versions were not recovered from W&B. The package declares Python 3.10 or later; the Ubuntu setup script installs a CUDA 12.8 PyTorch wheel for a new run, which does not establish the historical software versions.
+
+For a fresh Ubuntu setup from the repository root, run:
+
+```bash
+bash scripts/setup_remote_ubuntu.sh
+```
+
+That setup script installs dependencies, checks for an NVIDIA GPU, and runs the local test suite. It prepares an execution environment; it does not validate the official KGDMC datasets or reproduce the published benchmark.
+
 ## Windows GPU setup
 
 ```powershell
-cd C:\Users\<USER>\paper_2
+cd C:\Users\<USER>\kgdmc-reproduction
 py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
@@ -40,7 +52,7 @@ python -m kgdmc.cli data encode-images --dataset fb15k237 `
 
 The script `scripts/run_recovery_subset.py` passes the same corruption manifest to training and inference. The `experiments suite` implementation also passes the same manifest to training and inference for its triplet experiments. Their triplet precision/recall measures training-pair ranking, not held-out performance. Do not report those metrics as independent evaluation or paper reproduction. Historical subset runs were saved locally with W&B disabled; changing the project name does not upload or recreate them.
 
-The following is the original adapted-suite invocation for reference, not a verified clean-environment or official benchmark rerun. New main and ablation runs belong in the [KGDMC main W\&B project](https://forge.coreweave.com/wandb/nghidt-hcmus/multimodal-kg-error-detection). Recovered evaluation entries are separated in the [KGDMC evaluation/subset project](https://forge.coreweave.com/wandb/nghidt-hcmus/multimodal-kg-error-detection-subset); their subset provenance must be checked before interpreting them. Replace the cache paths with actual paths and separately verify the evaluation protocol:
+The following is the original adapted-suite invocation for reference, not a verified clean-environment or official benchmark rerun. New main and ablation runs belong in the [KGDMC main W\&B project](https://forge.coreweave.com/wandb/nghidt-hcmus/multimodal-kg-error-detection). Recovered evaluation entries are separated in the [KGDMC evaluation/subset project](https://forge.coreweave.com/wandb/nghidt-hcmus/multimodal-kg-error-detection-subset); their subset provenance must be checked before interpreting them. Replace the cache paths with actual paths and separately verify the evaluation protocol. These W\&B projects are not verified as publicly viewable; the team privacy policy currently blocks Public access. Do not present the links as public until an administrator changes the policy, the projects are made public, and a signed-out check succeeds.
 
 ```powershell
 $env:WANDB_MODE="online"
