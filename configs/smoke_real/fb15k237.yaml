@@ -1,0 +1,16 @@
+dataset: fb15k237
+profile: real_smoke
+seed: 42
+device: auto
+data_root: datasets
+paper_fidelity: PAPER_FAITHFUL_REAL_SUBGRAPH
+require_real_text: true
+require_real_images: true
+model:
+  text_backbone: bert-base-cased
+  image_backbone: google/vit-base-patch16-224-in21k
+  hidden_dim: 768
+training:
+  max_steps: 2
+  amp: false
+
