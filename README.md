@@ -10,6 +10,8 @@ This folder contains the DMR/MTC reconstruction and scripts; datasets, image man
 
 The group's rental record for the KGDMC attempt lists Ubuntu 24.04, an Intel Core i5 (generation not recorded), and an NVIDIA RTX 5060 Ti. This is the reported rental configuration, not per-run telemetry. Historical Python, PyTorch, and CUDA versions were not recovered from W&B. The package declares Python 3.10 or later; the Ubuntu setup script installs a CUDA 12.8 PyTorch wheel for a new run, which does not establish the historical software versions.
 
+The recovered historical W&B group name includes `rtx5070`, which conflicts with that rental screenshot. A group label is not hardware telemetry; the run metadata records only CUDA, so the GPU used by each historical run remains unverified.
+
 For a fresh Ubuntu setup from the repository root, run:
 
 ```bash
