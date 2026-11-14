@@ -54,11 +54,11 @@ python -m kgdmc.cli data encode-images --dataset fb15k237 `
 
 The script `scripts/run_recovery_subset.py` passes the same corruption manifest to training and inference. The `experiments suite` implementation also passes the same manifest to training and inference for its triplet experiments. Their triplet precision/recall measures training-pair ranking, not held-out performance. Do not report those metrics as independent evaluation or paper reproduction. Historical subset runs were saved locally with W&B disabled; changing the project name does not upload or recreate them.
 
-The following is the original adapted-suite invocation for reference, not a verified clean-environment or official benchmark rerun. New main and ablation runs belong in the [KGDMC main W\&B project](https://forge.coreweave.com/wandb/nghidt-hcmus/multimodal-kg-error-detection). Recovered evaluation entries are separated in the [KGDMC evaluation/subset project](https://forge.coreweave.com/wandb/nghidt-hcmus/multimodal-kg-error-detection-subset); their subset provenance must be checked before interpreting them. Replace the cache paths with actual paths and separately verify the evaluation protocol. These W\&B projects are not verified as publicly viewable; the team privacy policy currently blocks Public access. Do not present the links as public until an administrator changes the policy, the projects are made public, and a signed-out check succeeds.
+The following is the original adapted-suite invocation for reference, not a verified clean-environment or official benchmark rerun. New main and ablation runs belong in the [KGDMC main/ablation W&B project](https://forge.coreweave.com/wandb/nghidt-hcmus/kgdmc-training-ablation/workspace?nw=8ct0en9rizi); subset diagnostics belong in the separate [KGDMC subset project](https://forge.coreweave.com/wandb/nghidt-hcmus/kgdmc-subset-diagnostics/workspace?nw=jsdwd6ilo). Both projects were checked in an incognito session on 14 November 2026: the main/ablation project showed 19 runs and the subset project showed four entries, with runs and charts visible. These counts describe logged entries, not benchmark completeness. The subset experiment reuses corruption pairs between training and evaluation, so its scores are not held-out results. W&B's move operation did not transfer associated artifacts. Replace the cache paths below with actual paths and verify the evaluation protocol before interpreting any new metrics.
 
 ```powershell
 $env:WANDB_MODE="online"
-$env:WANDB_PROJECT="multimodal-kg-error-detection"
+$env:WANDB_PROJECT="kgdmc-training-ablation"
 $env:WANDB_RUN_GROUP="paper2-full-suite-rtx5070"
 python -m kgdmc.cli experiments suite `
   --dataset fb15k237 `
