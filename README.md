@@ -59,7 +59,7 @@ The following is the original adapted-suite invocation for reference, not a veri
 ```powershell
 $env:WANDB_MODE="online"
 $env:WANDB_PROJECT="kgdmc-training-ablation"
-$env:WANDB_RUN_GROUP="paper2-full-suite-rtx5070"
+$env:WANDB_RUN_GROUP="kgdmc-main-seeds42-46"
 python -m kgdmc.cli experiments suite `
   --dataset fb15k237 `
   --text-cache <TEXT_CACHE> `
